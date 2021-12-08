@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     FragmentAdapter adapter;
     IMyAidlInterface iMyAidlInterface;
     Boolean connected=true;
-    Button btn;
-    ImageButton imgBtn1;
+
+
 
 
 
@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Now Playing"));
         tabLayout.addTab(tabLayout.newTab().setText("Song List"));
 
-        btn=findViewById(R.id.button);
-        imgBtn1=findViewById(R.id.play);
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -84,31 +83,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = new Intent("com.example.project_vehicle_service_01.AIDL");
-
-        intent.setClassName("com.example.project_vehicle_service_01",
-                "com.example.project_vehicle_service_01.MyService");
-        if(getBaseContext().getApplicationContext().bindService(intent, serviceCon, Context.BIND_AUTO_CREATE)){
-            connected=true;
-            Toast.makeText(getApplicationContext(), "BindServiceSuccess", Toast.LENGTH_SHORT).show();
-            System.out.println("success");
-        }else
-            Toast.makeText(getApplicationContext(), "BindServiceFailed", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent("com.example.project_vehicle_service_01.AIDL");
+//
+//        intent.setClassName("com.example.project_vehicle_service_01",
+//                "com.example.project_vehicle_service_01.MyService");
+//        if(getBaseContext().getApplicationContext().bindService(intent, serviceCon, Context.BIND_AUTO_CREATE)){
+//            connected=true;
+//            Toast.makeText(getApplicationContext(), "BindServiceSuccess", Toast.LENGTH_SHORT).show();
+//            System.out.println("success");
+//        }else
+//            Toast.makeText(getApplicationContext(), "BindServiceFailed", Toast.LENGTH_SHORT).show();
 
 
 }
 
-    private final ServiceConnection serviceCon=new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            iMyAidlInterface = IMyAidlInterface.Stub.asInterface(iBinder);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-
-        }
-    };
+//    private final ServiceConnection serviceCon=new ServiceConnection() {
+//        @Override
+//        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+//            iMyAidlInterface = IMyAidlInterface.Stub.asInterface(iBinder);
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName componentName) {
+//
+//        }
+//    };
 
 
     public void play(View view) { ;
@@ -123,21 +122,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void playSong(View view) {
-            view.setVisibility(View.INVISIBLE);
-            try {
-                iMyAidlInterface.playSong();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-
-    }
-
-    public void pauseSong(View view) {
-        try {
-            iMyAidlInterface.playSong();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        }
 }
